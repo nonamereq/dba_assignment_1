@@ -1,0 +1,228 @@
+<!Doctype html>
+
+<html>
+
+    <head>
+        <title>Database Concepts</title>
+        <style>
+            body {
+                width: 70%;
+                margin: auto;
+            }
+            h1 {
+                color: #009;
+            }
+
+            h2, h3 {
+                color: #900;
+            }
+
+            h4 {
+                color: #099;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            code {
+                font-weight: bold;
+                text-decoration: italic;
+            }
+
+            div h3 {
+                color: #555;
+            }
+            div {
+                background-color: rgba(224, 224, 224, 0.5);
+                display: inline-block;
+                padding: .5em;
+                line-height: 1.2em;
+                position: fixed;
+                left: 0;
+                top: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <h3>Name: Abel Mulugeta</h3>
+            <h3>ID: Atr/9162/08</h3>
+        </div>
+        <h1>Table</h1>
+        <h2>Description</h2>
+        <p>
+            A table is a database object that stores a collection of related data within a database. A table is the base element in the relational database. A table consist of columns and rows. The columns are fixed but the rows can change.
+        </p>
+        <h2>Implementation</h2>
+        <code lang="sql">
+            create table books(id int, name varchar(255))
+        </code>
+        <h2>Code explanation</h2>
+        <p>
+            The above sql code creates a table with columns id and name. Which have a datatype of int and string respectivly.
+        </p>
+
+        <h1>Index</h1>
+        <h2>Description</h2>
+        <p>
+            A database index is a data structure that is used to increase performance of a database's data retrival. 
+        </p>
+        <h2>Types of indexes</h2>
+        <h3>Unique Key</h3>
+        <p>
+            A unique key is a constraint on a database column(s) that doesn't allow two rows with the same value on that column(s)
+        </p>
+        <h4>Implementation</h4>
+        <p>
+        <code lang="sql">create table books(id int, name varchar(255) unique(name))</code>
+        <br/>
+        <code lang="sql">alter table books add unique(name)</code>
+        </p>
+        <h4>Code explanation</h4>
+        <p>
+            The above two commands both create a unique key on the column name. The first one adds it when creating. The second one alters the table to add it.
+        </p>
+        <h3>Primary Key</h3>
+        <p>
+            A primary key is a constraint on a database column. It is the same as unique key except that there can't be more than one primary key in a table and it can't be null.
+        </p>
+        <h4>Implementation</h4>
+        <p>
+        <code lang="sql">create table books (id int primary key, name varchar(255) unique(name))</code>
+        <br/>
+        <code lang="sql">alter table books add primary key(id)</code>
+        </p>
+        <h4>Code explanation</h4>
+        <p>
+            The above two commands both create a primary key on the column id. The first one adds it when creating. The second one alters the table to add it.
+        </p>
+
+        <h2>Implementation</h2>
+        <p>
+        <code lang="sql">create table books(id int primary key, name varchar(255) index(name))</code>
+        <br/>
+        <code lang="sql">alter table books add index(name)</code>
+        </p>
+        <h2>Code explanation</h2>
+        <p>
+            The above two commands both create a index on the column name. The first one adds it when creating. The second one alters the table to add it.
+        </p>
+
+        <h1>View</h1>
+        <p>
+            A database view is the result set of a stored query on the data. A database view can be viewed as a subset of the table the query was run in
+        </p>
+        <h2>Implementation</h2>
+        <code lang="sql">select name from books where id=1</code>
+        <br/>
+        <code lang="sql">update books set name="The history of philosophy" from books where id=1</code>
+        <h2>Code explanation</h2>
+        <p>
+            The select statment creates a read only view. The update statment creates a read write view.
+        </p>
+
+        <h1>Cursor</h1>
+        <p>
+            A database cursor is a pointer to a certain row on a view. It has the advantage for large result sets(views)
+        </p>
+        <h2>Implementation</h2>
+        <p>
+        <code lang="sql">declare name_cursor Cursor for select name from books where id=1</code>
+        <code lang="sql">declare @name varchar(255)</code>
+        <code lang="sql">open name_cursor</code>
+        <code lang="sql">fetch name_cursor into @name</code>
+        <code lang="sql">close name_cursor</code>
+        </p>
+        <h2>Code explanation</h2>
+        <p>
+            First it declares a cursor and sets its query. Second it declares a varchar variable then it opens the cursor it then fetches the data in the cursor to the name variable.
+        </p>
+
+        <h1>Record</h1>
+        <p>
+            A record in a database is a certain row in a table.
+        </p>
+
+        <h1>Function</h1>
+        <p>
+            A function(procedure) is a logical schema that groups a set of sql statments to perform a specific task.
+        </p>
+        <h2>Implementation</h2>
+        <p>
+        <code lang="sql">
+            CREATE PROCEDURE addBook(IN name varchar(255))<br />
+            BEGIN <br />
+                Insert into books(name) values(name)<br />
+            END//
+        </code>
+        </p>
+        <h2>Code explanation</h2>
+        <p>
+            The above code creates a procedure that adds a value to our books table. It accepts a varchar(255) argument.
+        </p>
+        <h1>Package</h1>
+        <p>
+            A package is a group of related procedures together with the variables and cursors they use.
+        </p>
+
+        <h1>Object</h1>
+        <p>
+            A datbase object is a data structure used to either store or reference data. The most common object is the table.
+        </p>
+
+        <h1>Database link</h1>
+        <p>
+            A database link is a one way comminication path from a database server to another database server.
+        </p>
+        <h2>Implementation</h2>
+        <code lang="sql">create database link serverc connect to user identified by password using 'local';</code>
+        <h2>Code explanation</h2>
+        <p>Creates a database link between a user on serverc and local.</p>
+
+        <h1>Sequence</h1>
+        <p>
+            A database sequence is a feature which creates unique values. It is used to create automatic primary keys.
+        </p>
+
+        <h1>Trigger</h1>
+        <p>
+            A database trigger is a procedural code that is automatically run when certain events occur on a particular view, table or database.
+        </p>
+        <h2>Implementation</h2>
+        <code lang="sql">
+            create trigger print new_books after insert on books for each row <br />
+            when (new.id &gt; 0) <br />
+            begin<br/>
+            dbms_output.put('New item: ' || :new.name)<br/>
+            end;
+        </code>
+        <h2>Code explanation</h2>
+        <p>
+            The above code creates a trriger to be run when an insert operation on books is finished. It then prints the new book.
+        </p>
+
+        <h1>Not Null(constraint)</h1>
+        <p>
+            This is a constraint on a column of a database that requires that column to have a value for every record.
+        </p>
+
+        <h1>Check(constraint)</h1>
+        <p>
+            This is a constraint that is used to limit the value range of a column
+        </p>
+        <h2>Implementation</h2>
+        <code lang="sql">alter table books add check(id &gt; 1)</code>
+        <h2>Code explanation</h2>
+        <p>
+            The above code requires all values in the id column to have a greater value than 1
+        </p>
+
+        <h1>Foreign key(constraint)</h1>
+        <p>
+            A foreign key is the basis of all relations. It is used to link two tables together.
+        </p>
+    </body>
+
+</html>
