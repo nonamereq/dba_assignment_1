@@ -1,3 +1,3 @@
-#Database Assignment 1
+Database Assignment 1
 
 Database concepts
